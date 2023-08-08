@@ -45,7 +45,7 @@ display.textContent = 0;
 
 for (const button of allButtons){
     button.addEventListener('click', ()=>{
-        if (display.textContent === snarkyString){
+        if (display.textContent.includes(snarkyString)){
             display.textContent = "";
         }
     })
@@ -54,17 +54,28 @@ for (const button of allButtons){
         
         button.addEventListener('click', ()=>{
             display.textContent = 0;
-            
+            if (display.textContent === snarkyString){
+                display.textContent = "";
+            }
         });
     }
     
     // if 0-9 number
     else if(!isNaN(button.textContent) || button.textContent === "."){
         
+
         button.addEventListener('click', ()=>{
             if(display.textContent === "0") display.textContent = "";
-            
-            display.textContent += button.textContent;
+            if (!(display.textContent.includes(".") && 
+            button.textContent === ".")) {
+                console.log(display.textContent);
+                console.log(button.textContent);
+                display.textContent += button.textContent;
+            }
+            if (display.textContent.includes(snarkyString)){
+                display.textContent = snarkyString;
+            }
+
         });
     }
     else{
@@ -73,13 +84,29 @@ for (const button of allButtons){
                     if(display.textContent === "0") display.textContent = "";
                     display.textContent = evaluate(display.textContent);
                     display.textContent += button.textContent;
+                    if (display.textContent.includes(snarkyString)){
+                        display.textContent = snarkyString;
+                    }
             });
         }
         else if(button.textContent === "="){
             button.addEventListener('click', ()=>{
                 if(display.textContent === "0") display.textContent = "";
                 display.textContent = evaluate(display.textContent);
+
+                if (display.textContent.includes(snarkyString)){
+                    display.textContent = snarkyString;
+                }
             });
+        }
+        else if (button.textContent === "←"){
+            button.addEventListener('click', ()=>{
+                display.textContent = display.textContent.slice(0,-1);
+            });
+
+            if (display.textContent.includes(snarkyString)){
+                display.textContent = snarkyString;
+            }
         }
     }
 }

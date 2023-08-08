@@ -35,7 +35,7 @@ h1{
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.buttons button, button.zero{
+.buttons button, div.bottom *{
     font-size: 20px;
     width: 70px;
     padding: 10px 0;
@@ -49,12 +49,17 @@ h1{
     background-color: rgb(249, 91, 91);
 }
 
-.buttons button:hover, button.dot:hover, button.zero:hover{
+.buttons button:hover, button.dot:hover, button.bottom:hover{
     background-color: black;
     color: white;
 }
 
-button.zero{
-    width: 100%;
+div.bottom *{
+    width: 49%;
     height: 50px;
+    display: inline;
+
+}
+button.bottom #zero{
+    margin-top: 0;
 }
