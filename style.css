@@ -49,7 +49,7 @@ h1{
     background-color: rgb(249, 91, 91);
 }
 
-.buttons button:hover, button.dot:hover, button.bottom:hover{
+.buttons button:hover, button.dot:hover, div.bottom button:hover{
     background-color: black;
     color: white;
 }

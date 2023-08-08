@@ -200,7 +200,7 @@ function evaluate(expression){
         operator = '/';
     }
 
-    console.log("OPERATOR:", operator);
+
     let operands = expression.split(operator);
     let firstOperand = operands[0];
     let secondOperand = operands[1];
@@ -211,7 +211,6 @@ function evaluate(expression){
     if (isNaN(finalResult) ||
         (operator === '/' && Number(secondOperand) === 0)
     ){
-        // console.log(firstOperand, operator, secondOperand);
         return snarkyString;
     }
     return finalResult;
