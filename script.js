@@ -43,28 +43,31 @@ const allButtons = Array.from(document.querySelectorAll('button'));
 const display = document.querySelector('.display');
 display.textContent = 0;
 
+function handleClear(){
+
+}
+
+      
+
 for (const button of allButtons){
-    button.addEventListener('click', ()=>{
-        if (display.textContent.includes(snarkyString)){
-            display.textContent = "";
-        }
-    })
+
     // if clear
     if (button.textContent === "clear"){
         
         button.addEventListener('click', ()=>{
+            
             display.textContent = 0;
-            if (display.textContent === snarkyString){
-                display.textContent = "";
-            }
+
         });
     }
     
     // if 0-9 number
     else if(!isNaN(button.textContent) || button.textContent === "."){
-        
+    button.addEventListener('click', ()=>{
+            if (display.textContent.includes(snarkyString)){
+                display.textContent = "";
+            }
 
-        button.addEventListener('click', ()=>{
             if(display.textContent === "0") display.textContent = "";
             if (!(display.textContent.includes(".") && 
             button.textContent === ".")) {
@@ -72,41 +75,40 @@ for (const button of allButtons){
                 console.log(button.textContent);
                 display.textContent += button.textContent;
             }
-            if (display.textContent.includes(snarkyString)){
-                display.textContent = snarkyString;
-            }
-
         });
     }
     else{
         if (allOperations.includes(button.textContent)){
             button.addEventListener('click', ()=>{
-                    if(display.textContent === "0") display.textContent = "";
-                    display.textContent = evaluate(display.textContent);
+                if (display.textContent.includes(snarkyString)){
+                    display.textContent = "";
+                }
+                if(display.textContent === "0") display.textContent = "";
+                display.textContent = evaluate(display.textContent);
+                if (!display.textContent.includes(snarkyString)){
                     display.textContent += button.textContent;
-                    if (display.textContent.includes(snarkyString)){
-                        display.textContent = snarkyString;
-                    }
+                }
+
             });
         }
         else if(button.textContent === "="){
             button.addEventListener('click', ()=>{
+                if (display.textContent.includes(snarkyString)){
+                    display.textContent = "";
+                }
                 if(display.textContent === "0") display.textContent = "";
                 display.textContent = evaluate(display.textContent);
-
-                if (display.textContent.includes(snarkyString)){
-                    display.textContent = snarkyString;
-                }
             });
         }
         else if (button.textContent === "←"){
             button.addEventListener('click', ()=>{
+                if (display.textContent.includes(snarkyString)){
+                    display.textContent = "";
+                }
                 display.textContent = display.textContent.slice(0,-1);
             });
 
-            if (display.textContent.includes(snarkyString)){
-                display.textContent = snarkyString;
-            }
+
         }
     }
 }
@@ -136,8 +138,10 @@ function evaluate(expression){
     let operands = expression.split(operator);
     let firstOperand = operands[0];
     let secondOperand = operands[1];
+
+
     if (operator === '/' && Number(secondOperand) === 0){
-        return 'HAHAHAHA';
+        return snarkyString;
     }
     
     let finalResult = operate(operator, firstOperand, secondOperand);
