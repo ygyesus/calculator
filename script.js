@@ -104,15 +104,22 @@ document.addEventListener("keydown", (e)=>{
     // operators
     else if (key === '+' || key === '-' || key === 'x' || key === '/'){
 
+
         if (display.textContent.includes(snarkyString)){
             display.textContent = "";
         }
-        if(display.textContent === "0") display.textContent = "";
-        display.textContent = evaluate(display.textContent);
-        if (!display.textContent.includes(snarkyString)){
-            display.textContent += key;
-        }
 
+        if (!isNaN(display.textContent.slice(-1))){
+ 
+            if(display.textContent === "0") display.textContent = "";
+            display.textContent = evaluate(display.textContent);
+            if (!display.textContent.includes(snarkyString)){
+                display.textContent += key;
+            }  
+        }
+    }
+    else if (key === 'Escape'){
+        display.textContent = 0;
     }
 })
 
@@ -182,22 +189,25 @@ for (const button of allButtons){
 
 
 function evaluate(expression){
+ 
+
     if (!isNaN(expression)){
         return Math.round(expression*100)/100;
     }
 
     let operator;
-    if (expression.includes('+')){
-        operator = '+';
-    }
-    else if (expression.includes('-')){
-        operator = '-';
+
+    if (expression.includes('/')){
+        operator = '/';
     }
     else if (expression.includes('x')){
         operator = 'x';
     }
-    else if (expression.includes('/')){
-        operator = '/';
+    else if (expression.includes('+')){
+        operator = '+';
+    }
+    else if (expression.includes('-')){
+        operator = '-';
     }
 
 
